@@ -31,6 +31,7 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
     lateinit var recyclerView: RecyclerView
     private var wordsListAdapter: WordsListAdapter? = null
     private var sortOption = -1
+    var words: MutableList<Word> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +39,11 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
         AndroidSupportInjection.inject(this)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(WordViewModel::class.java)
         wordsListAdapter = WordsListAdapter(this)
-        arguments?.let { bundle ->
-            sortOption = bundle.getInt("sort_by")
-        }
+
         viewModel.wordLiveData.observe( this, Observer { wordsList ->
             toggleProgressBar(false)
             if (wordsList.list != null) {
+                words.addAll(wordsList.list)
                 sortBy(sortOption, wordsList.list)
             } else {
                 androidx.appcompat.app.AlertDialog.Builder(context!!) //todo remove !!
@@ -77,27 +77,32 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
                 return false
             }
         })
-
     }
 
-    private fun sortBy(sortOption: Int, wordsList: List<Word>) {
+    fun sortBy(sortOption: Int, wordsList: List<Word>) {
+        //todo this function could definitely be more DRY
         val sortedList = mutableListOf<Word>()
         when (sortOption) {
             -1 -> {
                 // Default not sorted
-                sortedList.addAll(wordsList)
+                wordsListAdapter?.addWords(wordsList)
+                wordsListAdapter?.notifyDataSetChanged()
             }
             MOST_LIKES -> {
-                sortedList.addAll(wordsList.sortedByDescending { it.thumbsUp })
+                wordsListAdapter?.clear()
+                val newList = wordsList.sortedByDescending { it.thumbsUp }
+                wordsListAdapter?.addWords(newList)
+                wordsListAdapter?.notifyDataSetChanged()
                 Toast.makeText(context, "Sorting By Most Likes!", Toast.LENGTH_SHORT).show()
             }
             MOST_UNLIKES -> {
-                sortedList.addAll(wordsList.sortedByDescending { it.thumbsDown })
+                wordsListAdapter?.clear()
+                val newList = wordsList.sortedByDescending { it.thumbsDown }
+                wordsListAdapter?.addWords(newList)
+                wordsListAdapter?.notifyDataSetChanged()
                 Toast.makeText(context, "Sorting By Most UnLikes!", Toast.LENGTH_SHORT).show()
             }
         }
-        wordsListAdapter?.addWords(sortedList)
-        wordsListAdapter?.notifyDataSetChanged()
     }
 
     private fun getDefinitions(term: String) {

@@ -39,6 +39,10 @@ class WordsListAdapter(
         wordsList.addAll(words)
     }
 
+    fun clear() {
+        wordsList.clear()
+    }
+
     class WordViewHolder constructor(parent: ViewGroup) : RecyclerView.ViewHolder(
         LayoutInflater.from(parent.context)
             .inflate(R.layout.item_words_list, parent, false)

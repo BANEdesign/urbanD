@@ -11,7 +11,11 @@ import androidx.navigation.findNavController
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
+import androidx.navigation.fragment.NavHostFragment
+
+
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, NavHost {
 
@@ -29,16 +33,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, NavHost {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val bundle = Bundle()
+        val fragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val searchFragment = fragment!!.childFragmentManager.fragments[0] as FragmentSearch
         when (item?.itemId) {
             R.id.likesAscending -> {
-                bundle.putInt("sort_by", FragmentSearch.MOST_LIKES)
-                this.navController.navigate(R.id.fragmentSearch, bundle)
+                searchFragment.sortBy(FragmentSearch.MOST_LIKES, searchFragment.words)
                 return true
             }
             R.id.likesDescending -> {
-                bundle.putInt("sort_by", FragmentSearch.MOST_UNLIKES)
-                this.navController.navigate(R.id.fragmentSearch, bundle)
+                searchFragment.sortBy(FragmentSearch.MOST_UNLIKES, searchFragment.words)
                 return true
             }
         }
