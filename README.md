@@ -2,6 +2,12 @@
 
 Fetches a list of Urban Dictionary definitions for queried term.
 
+
+
+<p align="center">
+<img src="https://github.com/BANEdesign/urbanD/blob/master/screenshots/Screenshot_1578590450.png" alt="Drawing" width="200" height="400"/>
+</p>  
+
 ### Architecture Components
 This application implements the following concepts :
 - MVVM
