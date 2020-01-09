@@ -80,8 +80,6 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
     }
 
     fun sortBy(sortOption: Int, wordsList: List<Word>) {
-        //todo this function could definitely be more DRY
-        val sortedList = mutableListOf<Word>()
         when (sortOption) {
             -1 -> {
                 // Default not sorted
@@ -89,20 +87,19 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
                 wordsListAdapter?.notifyDataSetChanged()
             }
             MOST_LIKES -> {
-                wordsListAdapter?.clear()
-                val newList = wordsList.sortedByDescending { it.thumbsUp }
-                wordsListAdapter?.addWords(newList)
-                wordsListAdapter?.notifyDataSetChanged()
+                updateList(wordsList.sortedByDescending { it.thumbsUp })
                 Toast.makeText(context, "Sorting By Most Likes!", Toast.LENGTH_SHORT).show()
             }
             MOST_UNLIKES -> {
-                wordsListAdapter?.clear()
-                val newList = wordsList.sortedByDescending { it.thumbsDown }
-                wordsListAdapter?.addWords(newList)
-                wordsListAdapter?.notifyDataSetChanged()
+                updateList(wordsList.sortedByDescending { it.thumbsDown })
                 Toast.makeText(context, "Sorting By Most UnLikes!", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun updateList(list: List<Word>) {
+        wordsListAdapter?.clear()
+        wordsListAdapter?.addWords(list)
+        wordsListAdapter?.notifyDataSetChanged()
     }
 
     private fun getDefinitions(term: String) {
