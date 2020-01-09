@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Urban Dictionary App</string>
+    <string name="most_likes">Most Likes</string>
+    <string name="most_unlikes">Most Unlikes</string>
 </resources>

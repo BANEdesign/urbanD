@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <ImageView
+        android:id="@+id/thumbsUpIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_thumbs_up"
+        android:tint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/thumbsUpCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/thumbsUpIcon"
+        app:layout_constraintStart_toStartOf="@+id/thumbsUpIcon"
+        app:layout_constraintTop_toBottomOf="@id/thumbsUpIcon"
+        tools:text="1196" />
+
+    <ImageView
+        android:id="@+id/thumbsDownIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_thumbs_down"
+        android:tint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/thumbsUpIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/thumbsDownCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/thumbsDownIcon"
+        app:layout_constraintStart_toStartOf="@+id/thumbsDownIcon"
+        app:layout_constraintTop_toBottomOf="@id/thumbsDownIcon"
+        tools:text="240" />
+
+    <TextView
+        android:id="@+id/wordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/thumbsDownIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Word" />
+
+    <TextView
+        android:id="@+id/definitionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:maxLines="3"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/wordTextView"
+        app:layout_constraintTop_toBottomOf="@+id/wordTextView"
+        tools:text="The only [proper] [response] to something that makes absolutely [no sense]." />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
