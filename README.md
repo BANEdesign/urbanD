@@ -1,4 +1,4 @@
-# Urblan Dictionary App
+# Urban Dictionary App
 
 Fetches a list of Urban Dictionary definitions for queried term.
 
