@@ -36,6 +36,7 @@ class WordsListAdapter(
     }
 
     fun addWords(words: List<Word>) {
+        wordsList.clear()
         wordsList.addAll(words)
     }
 

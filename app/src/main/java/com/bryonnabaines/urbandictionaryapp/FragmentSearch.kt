@@ -97,7 +97,6 @@ class FragmentSearch : Fragment(), WordsListAdapter.OnItemClickListener {
         }
     }
     private fun updateList(list: List<Word>) {
-        wordsListAdapter?.clear()
         wordsListAdapter?.addWords(list)
         wordsListAdapter?.notifyDataSetChanged()
     }
